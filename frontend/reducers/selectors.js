@@ -1,5 +1,10 @@
 import { values } from 'lodash';
 
-const selectAllPokemon = ({ pokemon }) => values(pokemon);
+export const selectAllPokemon = ({ pokemon }) => values(pokemon.entities);
 
-export default selectAllPokemon;
+export const selectSinglePokemon = ({entities}, id) => (entities[id] || {});
+
+export const selectPokemonItem = ({ pokemonDetail }, itemId) => {
+  const foundItem = pokemonDetail.items.find(item => item.id === itemId);
+  return foundItem || {};
+};

@@ -1,5 +1,6 @@
 export const RECEIVE_ALL_POKEMON = "RECEIVE_ALL_POKEMON";
 export const RECEIVE_SINGLE_POKEMON = "RECEIVE_SINGLE_POKEMON";
+export const RECEIVE_SINGLE_POKEMONS_ITEMS = "RECEIVE_SINGLE_POKEMONS_ITEMS";
 // import {fetchAllPokemon} from '../util/api_util';
 import * as APIUtil from '../util/api_util';
 
@@ -8,11 +9,15 @@ export const receiveAllPokemon = pokemon => ({
   pokemon
 });
 
-export const receiveSinglePokemon = poke => ({
+export const receiveSinglePokemon = pokemon => ({
   type: RECEIVE_SINGLE_POKEMON,
-  poke
+  pokemon
 });
 
+export const receivePokemonItems = items => ({
+  type: RECEIVE_SINGLE_POKEMONS_ITEMS,
+  items
+});
 
 
 // async actions
@@ -21,9 +26,12 @@ export const requestAllPokemon = () => (dispatch) => {
     .then(pokemon => dispatch(receiveAllPokemon(pokemon)));
 };
 
-export const requestSinglePokemon = () => (dispatch) => {
-  return APIUtil.fetchSinglePokemon()
-    .then(poke => dispatch(receiveSinglePokemon(poke)));
+export const requestSinglePokemon = (id) => (dispatch) => {
+  return APIUtil.fetchSinglePokemon(id)
+    .then(data => {
+      dispatch(receiveSinglePokemon(data.poke));
+      dispatch(receivePokemonItems(data.items));
+    });
 };
 
 

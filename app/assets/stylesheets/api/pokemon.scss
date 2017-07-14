@@ -5,3 +5,16 @@
 ul {
   list-style-type: none;
 }
+
+.pokedex > ul {
+  overflow: scroll;
+  width: 300px;
+
+}
+
+img {
+  width: 20px;
+  vertical-align: middle;
+  margin: 0 10px;
+  padding: 5px;
+}
